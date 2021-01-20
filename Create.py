@@ -1,4 +1,51 @@
 from random import randint
+from csv import reader
+from copy import deepcopy
+
+lista = list()  # Criação da lista a qual serão armazenadas as informações do csv
+with open('Monstros.csv') as arquivoCSV:
+    csv_monstros = reader(arquivoCSV,
+                          delimiter=',')  # Armazenamento das informações do csv dentro da variavel csv_monstros
+
+    for row in csv_monstros:
+        lista.append(row[:7][:7])  # Aqui é armazenado as informações dentro da lista
+
+cont = 0  # Contador
+for monstro in lista:  # For feito para se saber quantos monstros tem na lista, ignorando a primeira linha.
+    cont = cont + 1
+cont -= 1
+
+dicionario = dict()  # Criação do diccionario no qual serão melhor organizados as informações da lista
+
+lista2 = list()  # Criação da lista na qual será armezanado o dicionario
+
+# Variaveis contadoras abaixo
+cont2 = 0
+cont4 = 0
+cont3 = 1
+
+for tot in range(0, cont):  # Esse for irá se repetir na mesma quantidade de monstros da variavel contadora cont
+    for pup in range(1, 8):  # Esse for se repete n vezes onde é quantidade de campos em uma linha do arquivo csv
+        dicionario[lista[0][cont2]] = lista[cont3][
+            cont4]  # Aqui é armazena no dicionario todas as informações apropriadamente
+        """Esse é o processo feito dentro desse for
+            dicionario[lista[0][0]] = lista[1][0]
+            dicionario[lista[0][1]] = lista[1][1]
+            dicionario[lista[0][2]] = lista[1][2]
+            dicionario[lista[0][3]] = lista[1][3]
+            dicionario[lista[0][4]] = lista[1][4]
+            dicionario[lista[0][5]] = lista[1][5]"""
+        # Acumulo das variaveis contadoras
+        cont2 += 1
+        cont4 += 1
+    cont3 += 1
+    cont2 = 0
+    cont4 = 0
+    lista2.append(
+        deepcopy(dicionario))  # Aqui é feita uma cópia do dicionario a qual é armazenado dentro da lista lista2
+    dicionario.clear()  # Aqui o dicionario original é apagado
+
+print(f"Print da lista2 {lista2}")
 
 
 class PersonagemP:
